@@ -8,28 +8,7 @@
 </head>
 
 <body>
-    <!-- <form onsubmit="window.print()">
-        <table align="center">
-            <tr>
-                <td>name :- </td>
-                <td>
-                    <input type="text" id="name">
-                    <span id="nameerror" style="color: red;"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>Email :- </td>
-                <td>
-                    <input type="text" id="email">
-                    <span id="emailError" style="color: red;"></span>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="submit" id="submit"></td>
-            </tr>
-        </table>
-    </form> -->
+   
     <form align="center" onsubmit="return validateForm()">
         Name: <input type="text" id="name" name="name">
         <span class="error" id="nameError"></span>
@@ -62,7 +41,6 @@
             let emailError = document.getElementById("emailError");
             let passwordError = document.getElementById("passwordError");
             let confirmPasswordError = document.getElementById("confirmPasswordError");
-
             nameError.innerHTML = emailError.innerHTML = passwordError.innerHTML = confirmPasswordError.innerHTML = "";
 
             if (!name) {
@@ -73,19 +51,27 @@
                 nameError.innerHTML = "name minimum 6 characters";
                 
             }
-
             let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-            let  EmailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            let EmailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!email.match(emailPattern)) {
-                emailError.innerHTML = "Invalid email format";
-                
+                emailError.innerHTML = "Invalid email format"; 
             }
             else if (!email.match(EmailPattern)) {
-                emailError.innerHTML = "Email must be special character";
-                
+                emailError.innerHTML = "Email must be special character";  
             }
 
-            if (password.length < 6) {
+            let passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+            let PasswordPattern = /^[^ ]+@[^ ]+\.[0-9]{2,3}$/;
+
+            if(!password.match(passwordPattern)){
+                passwordError.innerHTML = "Password must be at least 6 characters long and must contain at least";
+            }
+
+            else if(password.match(passwordPattern)){
+                passwordError.innerHTML = "Your password must contain at least one letter, one number, and one special character"
+            }
+
+            else if (password.length < 6) {
                 passwordError.innerHTML = "Password minimum 6 characters";
             }
 
